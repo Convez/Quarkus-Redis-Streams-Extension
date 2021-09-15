@@ -1,7 +1,10 @@
 package org.convez.quarkus.redis.stream.extension.deployment;
 
+import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
+import io.quarkus.arc.deployment.BeanContainerBuildItem;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import org.convez.quarkus.redis.stream.extension.RedisStreamProducer;
 
 class QuarkusRedisStreamExtensionProcessor {
 
@@ -11,5 +14,9 @@ class QuarkusRedisStreamExtensionProcessor {
     FeatureBuildItem feature() {
         return new FeatureBuildItem(FEATURE);
     }
-
+    
+    @BuildStep
+    AdditionalBeanBuildItem createRedisProducer() {
+        return new AdditionalBeanBuildItem(RedisStreamProducer.class);
+    }
 }
